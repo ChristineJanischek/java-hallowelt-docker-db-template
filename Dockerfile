@@ -11,7 +11,7 @@ COPY ./src ./src
 COPY ./lib ./lib
 
 # Kompiliere alle Java-Dateien ins build-Verzeichnis
-RUN mkdir -p build && javac -d build src/start/*.java
+RUN mkdir -p build && javac -d build src/dbdemo/*.java
 
 # Starte das Programm mit JDBC-Treiber im Klassenpfad
-CMD ["java", "-cp", "build:lib/mysql-connector-j-8.4.0.jar", "start.Main"]
+CMD ["java", "-cp", "build:lib/mysql-connector-j-8.4.0.jar", "dbdemo.Main"]

@@ -1,4 +1,4 @@
-package start;
+package dbdemo;
 
 import java.sql.*;
 
@@ -16,7 +16,8 @@ public class DatabaseConnector {
     }
 
     // Diese Methode stellt die Verbindung her und führt eine einfache Abfrage aus
-    public void connectAndQuery() {
+    // Versucht, sich mit der DB zu verbinden und gibt true zurück, wenn erfolgreich
+    public boolean tryConnect() {
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             System.out.println("Datenbankverbindung erfolgreich!");
 
@@ -28,10 +29,13 @@ public class DatabaseConnector {
             while (rs.next()) {
                 System.out.println("Aktuelle Zeit in der DB: " + rs.getString(1));
             }
+            return true;
         } catch (Exception e) {
-            // Fehlerbehandlung
+            // Fehlerbehandlung - Rückgabe false, damit der Aufrufer neu versuchen kann
             System.err.println("Fehler bei der DB-Verbindung:");
-            e.printStackTrace();
+            // Kurze Fehlermeldung ausgeben (voller Stacktrace kann beim Retry stören)
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            return false;
         }
     }
 }

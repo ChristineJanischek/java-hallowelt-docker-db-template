@@ -1,0 +1,36 @@
+name: Java HalloWelt Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Java einrichten
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Abhängigkeiten installieren
+        run: |
+          mkdir -p out
+          javac -cp lib/mysql-connector-j-8.4.0.jar -d out src/dbdemo/*.java
+
+      - name: Test HalloWelt-Ausgabe
+        run: |
+          output=$(java -cp out:lib/mysql-connector-j-8.4.0.jar dbdemo.Main | head -n 1)
+          if [[ "$output" == "Hallo, Anna!" ]]; then
+            echo "10/10 Punkte: Ausgabe korrekt."
+            exit 0
+          else
+            echo "0/10 Punkte: Erwartet wurde 'Hallo, Anna!', aber erhalten: $output"
+            exit 1
+          fi
