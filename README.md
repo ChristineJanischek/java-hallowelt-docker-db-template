@@ -211,3 +211,14 @@ git push origin main
 ```
 
 Wenn du willst, führe ich jetzt die Git-Befehle hier im Container aus und pushe die Änderungen. Soll ich das tun oder möchtest du selber pushen? 
+
+<!-- CUSTOM_LICENSE_NOTICE_START -->
+## License
+
+This repository is licensed under a custom license.
+
+- Attribution required: Christine Janischek - https://emotionalspirit.de
+- Non-commercial use only
+- Use only within state school systems
+- Any other use requires explicit prior written permission
+<!-- CUSTOM_LICENSE_NOTICE_END -->
